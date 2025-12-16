@@ -15,11 +15,5 @@ main:
   - title: "Educations"
     url: "/#educations"
 
-  - title: "Teaching"
-    url: "/#teaching"
-
   - title: "Hobbies"
     url: "/#hobbies"
-
-  - title: "Reading Notes"
-    url: "/#reading-notes"

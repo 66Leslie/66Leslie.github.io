@@ -20,9 +20,7 @@ redirect_from:
 {% include_relative about/publications.md %}
 {% include_relative about/honors.md %}
 {% include_relative about/educations.md %}
-{% include_relative about/teaching.md %}
 {% include_relative about/hobbies.md %}
-{% include_relative about/reading-notes.md %}
 <!-- ========================================================================================================================================== -->
 <style>
 /* 只影响正文内容区的超链接 */
