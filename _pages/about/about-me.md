@@ -16,7 +16,6 @@ I also work with **robotic manipulators** and the **ROS ecosystem**, including:
 
 I have received the **National Second Prize** in the National Undergraduate Electronics Design Contest (NUEDC), and I have also participated in embedded chip & system design competitions and robotics contests.
 
-I am currently working on research projects including a **gravity energy storage system test platform** and **RL-based UAV height control** in air-ground collaborative scenarios.
 
 ### Contact
 * **University**: Nanjing Normal University
