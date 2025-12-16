@@ -1,0 +1,224 @@
+:root {
+    --primary-color: #2c3e50;
+    --accent-color: #3498db;
+    --text-color: #333;
+    --bg-color: #fff;
+    --secondary-bg: #f8f9fa;
+    --border-color: #e9ecef;
+    --max-width: 960px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+}
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Layout */
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header / Sidebar style for mobile, but let's do a top nav for simplicity as requested */
+header {
+    padding: 40px 0 20px;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 40px;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.profile-avatar img {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--border-color);
+}
+
+.profile-info h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+.profile-info h2 {
+    font-size: 1.2rem;
+    font-weight: normal;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-links a {
+    color: #555;
+    font-size: 0.95rem;
+    border: 1px solid #ddd;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.social-links a:hover {
+    background-color: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+    text-decoration: none;
+}
+
+/* Navigation */
+nav {
+    position: sticky;
+    top: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(5px);
+    z-index: 100;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 40px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    padding: 15px 0;
+    overflow-x: auto;
+}
+
+nav li {
+    margin-right: 25px;
+}
+
+nav a {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 1.05rem;
+}
+
+nav a:hover {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+/* Sections */
+section {
+    margin-bottom: 60px;
+    scroll-margin-top: 80px; /* For sticky header */
+}
+
+.section-title {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+}
+
+/* Content Styles */
+.news-item {
+    display: flex;
+    margin-bottom: 12px;
+}
+
+.news-date {
+    min-width: 100px;
+    font-family: monospace;
+    color: #666;
+    font-weight: bold;
+}
+
+.project-item, .publication-item {
+    margin-bottom: 25px;
+}
+
+.project-title {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--primary-color);
+}
+
+.project-meta {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.award-list {
+    list-style: none;
+}
+
+.award-item {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.award-year {
+    min-width: 80px;
+    color: #666;
+    font-weight: bold;
+}
+
+.tag {
+    display: inline-block;
+    background: #eef;
+    color: var(--accent-color);
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    margin-right: 5px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 40px 0;
+    color: #888;
+    font-size: 0.9rem;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .social-links {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .news-item, .award-item {
+        flex-direction: column;
+    }
+    
+    .news-date, .award-year {
+        margin-bottom: 4px;
+    }
+}
