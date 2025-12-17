@@ -1,5 +1,5 @@
 <span class="anchor" id="honors-and-awards"></span>
-# Honors and Awards
+# 🏆 Honors and Awards
 
 ### National Level
 * **2025.08**: National Second Prize, National Undergraduate Electronics Design Contest (NUEDC)

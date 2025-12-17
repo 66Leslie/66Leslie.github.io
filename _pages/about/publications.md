@@ -1,5 +1,5 @@
 <span class="anchor" id="publications"></span>
-# Projects & Research
+# 📚 Publications & Projects
 
 ### Research Projects
 

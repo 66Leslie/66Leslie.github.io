@@ -1,5 +1,5 @@
 <span class="anchor" id="news"></span>
-# News
+# 📰 News
 
 * **[Nov. 2025]** Won the **First Prize** in Jiangsu Robotics Competition (Simulation 3D Soccer).
 * **[Nov. 2025]** Won the **National Third Prize** in National Undergraduate Embedded Chip & System Design Competition (FPGA Track).
