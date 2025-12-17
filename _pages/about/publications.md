@@ -1,6 +1,11 @@
 <span class="anchor" id="publications"></span>
 # 📚 Publications & Projects
 
+<div class="notice--primary" markdown="1">
+#### Focus
+Robotics + UAV autonomy + embedded systems. I am especially interested in reinforcement learning for control and real-world system integration.
+</div>
+
 ### Research Projects
 
 1. **Gravity Energy Storage System Test Platform Based on 3D Printing Modular Design**

@@ -1,6 +1,10 @@
 <span class="anchor" id="news"></span>
 # 📰 News
 
+<div class="notice" markdown="1">
+Updates are listed in reverse chronological order.
+</div>
+
 * **[Nov. 2025]** Won the **First Prize** in Jiangsu Robotics Competition (Simulation 3D Soccer).
 * **[Nov. 2025]** Won the **National Third Prize** in National Undergraduate Embedded Chip & System Design Competition (FPGA Track).
 * **[Aug. 2025]** Won the **National Second Prize** in National Undergraduate Electronics Design Contest (NUEDC).
