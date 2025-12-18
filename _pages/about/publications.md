@@ -1,17 +1,16 @@
 <span class="anchor" id="publications"></span>
-# 📚 Publications & Projects
-
-<div class="notice--primary" markdown="1">
-#### Focus
-Robotics + UAV autonomy + embedded systems. I am especially interested in reinforcement learning for control and real-world system integration.
-</div>
+# 📚 Publications & Projects(Striving to pub)
 
 ### Research Projects
 
-1. **Gravity Energy Storage System Test Platform Based on 3D Printing Modular Design**
+1. **Autonomous Environment Understanding and Robust Reasoning for Embodied Agents**
+   * *Built Gazebo simulation for mobile manipulator and deployed "Perception-Planning-Execution" pipeline on real robots.*
+
+2. **Multi-modal LLM-driven Self-learning of Target Motion Models for PHD Filtering**
+   * *Implemented multi-target tracking baseline and ROS-driven motion model selection.*
+
+3. **RL-based UAV Height Control in Air-Ground Collaborative Multi-Target Tracking**
+   * *Designed PPO-based UAV height control strategies achieving superior stability in tracking scenarios.*
+
+4. **Gravity Energy Storage System Test Platform Based on 3D Printing Modular Design**
    * *National Innovation Training Program (Project Lead / Co-lead)*
-
-2. **Air-Ground Collaborative Multi-Target Tracking Reinforcement Learning UAV Height Control**
-   * Jiangsu Key Laboratory of 3D Printing Equipment and Manufacturing
-
-3. **VLM_LLM_PHDmix Research**
