@@ -15,11 +15,12 @@ I found my direction a bit later than I hoped, but now I’m all in — steady p
 - **Multi-Robot / Multi-Agent Systems**  
   Coordination and collaboration (multi-agent RL and system-level design)
 
-### 🧩 What I Build With
+### 🧩 I'm learning 
+- **Books**：RL ROS2
 - **Robotics stack**: ROS1 / ROS2, TF, RViz, URDF/Xacro  
-- **Simulation**: Gazebo  Simspark
+- **Simulation**: Mujoco Gazebo Simspark
 - **Manipulation**: MoveIt (motion planning)  
-- **Engineering**: Linux workflow, Git, system integration & debugging
+- **Engineering**: Linux workflow, Git
 
 ### 🏆 Highlights
 - **National Second Prize**, National Undergraduate Electronics Design Contest (NUEDC)  
