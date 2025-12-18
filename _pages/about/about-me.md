@@ -1,28 +1,30 @@
 <span class="anchor" id="about-me"></span>
 
 ## 🤖 About Me
+Hi! I'm an undergraduate student (2023–Present) at **Nanjing Normal University**, majoring in **Automation**.
 
-Hi! I'm an undergraduate student (2023–Present) at **Nanjing Normal University**, School of Electrical and Automation Engineering, majoring in **Automation**.
+My main interests are **Reinforcement Learning**, **Embodied AI**, and **Multi-Robot Systems**.
+I found my direction a bit later than I hoped, but now I’m all in — steady progress, stronger projects, and better engineering instincts.
 
-I’m interested in building **robotic systems that actually work end-to-end** — from reading papers and defining the problem, to implementing a runnable baseline, to iterating through experiments and debugging the full pipeline.
 
-### 🔭 Research Interests
-- **Embodied AI / Robotics**: autonomous environment understanding & robust reasoning for embodied agents  
-- **Reinforcement Learning**: policy learning for UAV control and multi-agent collaboration  
-- **Robotic Manipulation**: motion planning & simulation-to-deployment workflow
+### 🔥 Research Interests
+- **Reinforcement Learning for Robotics**  
+  Policy learning for control (e.g., UAV-related tasks) and decision-making under constraints
+- **Embodied AI**  
+  Embodied agents that can perceive, reason, and act in real/sim environments (navigation / manipulation workflows)
+- **Multi-Robot / Multi-Agent Systems**  
+  Coordination and collaboration (multi-agent RL and system-level design)
 
-### 🧰 Robotics Stack
-- **ROS**: ROS1 / ROS2, TF, RViz, URDF/Xacro  
-- **Simulation**: Gazebo  
-- **Manipulation**: MoveIt (motion planning), basic kinematics  
-- **Dev**: Linux workflow, Git, system integration & debugging
+### 🧩 What I Build With
+- **Robotics stack**: ROS1 / ROS2, TF, RViz, URDF/Xacro  
+- **Simulation**: Gazebo  Simspark
+- **Manipulation**: MoveIt (motion planning)  
+- **Engineering**: Linux workflow, Git, system integration & debugging
 
 ### 🏆 Highlights
 - **National Second Prize**, National Undergraduate Electronics Design Contest (NUEDC)  
-- Participated in **embedded chip & system design** competitions and **robotics contests**
 
 ### 📫 Contact
-- Email: `your_email@domain.com`  
-- (Optional) CV / Projects: `link_here`
+- Email: `zhaoleslie2@gmail.com`  
 
 

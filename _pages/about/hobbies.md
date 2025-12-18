@@ -1,6 +1,4 @@
 <span class="anchor" id="hobbies"></span>
 # 📸 Hobbies
-- Robotics & embedded system projects
-- Photography
+- Swimming
 - Running
-- Volunteering / community service
