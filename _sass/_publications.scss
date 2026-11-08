@@ -1,0 +1,172 @@
+/* ==========================================================================
+   PUBLICATIONS — /publications/
+   版式参考 qiayuanl.github.io 的 research 列表：缩略图在左、文字在右。
+   命名空间 .pub；选择器统一带前缀以压过主题的 .page__content 规则，
+   不依赖 @import 顺序，也不用 !important。
+   ========================================================================== */
+
+$pub-gap      : 1.4em;
+$pub-thumb    : 38%;      // 缩略图占卡片宽度
+$pub-thumb-max: 330px;
+$pub-radius   : 6px;
+
+/* —— 字号 —— */
+$pub-fs-title  : 1.02em;
+$pub-fs-meta   : 0.86em;
+$pub-fs-venue  : 0.84em;
+$pub-fs-btn    : 0.78em;
+
+.pub {
+  margin-top: 1.6em;
+}
+
+/* ==========================================================================
+   条目
+   ========================================================================== */
+
+.pub .pub__item {
+  display: flex;
+  gap: $pub-gap;
+  align-items: flex-start;
+  padding: 1em;
+  background-color: #fff;
+  border: 1px solid $border-color;
+  border-radius: $pub-radius;
+  transition: box-shadow 0.18s ease, border-color 0.18s ease;
+
+  &:hover {
+    border-color: $light-gray;
+    box-shadow: 0 2px 12px rgba(#000, 0.07);
+  }
+}
+
+.pub .pub__item + .pub__item {
+  margin-top: 1.2em;
+}
+
+/* ==========================================================================
+   缩略图
+   ========================================================================== */
+
+.pub .pub__thumb {
+  flex: 0 0 $pub-thumb;
+  max-width: $pub-thumb-max;
+  display: block;
+  line-height: 0;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid $border-color;
+    border-radius: 4px;
+  }
+}
+
+.pub .pub__thumb + .pub__body {
+  padding-top: 0.1em;
+}
+
+/* ==========================================================================
+   文字区
+   ========================================================================== */
+
+.pub .pub__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.pub .pub__title {
+  margin: 0 0 0.45em;
+  font-size: $pub-fs-title;
+  font-weight: 700;
+  line-height: 1.35;
+  color: $darker-gray;
+}
+
+.pub .pub__authors {
+  margin: 0 0 0.25em;
+  font-size: $pub-fs-meta;
+  line-height: 1.6;
+  color: $dark-gray;
+
+  b {
+    color: $darker-gray;
+    font-weight: 700;
+  }
+}
+
+.pub .pub__venue {
+  margin: 0 0 0.7em;
+  font-size: $pub-fs-venue;
+  font-style: italic;
+  color: $gray;
+}
+
+/* ==========================================================================
+   按钮 —— 药丸样式，与竞赛页筛选按钮同一套语言
+   ========================================================================== */
+
+.pub .pub__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45em;
+  margin: 0;
+}
+
+.pub .pub__item .pub__btn {
+  display: inline-block;
+  padding: 0.3em 0.9em;
+  font-size: $pub-fs-btn;
+  font-weight: 600;
+  line-height: 1.5;
+  color: $info-color;
+  background-color: mix(#fff, $info-color, 92%);
+  border: 1px solid $info-color;
+  border-radius: 999px;
+  text-decoration: none;
+
+  &:hover {
+    color: #fff;
+    background-color: $info-color;
+    text-decoration: none;
+  }
+}
+
+/* ==========================================================================
+   窄屏：缩略图堆到上方
+   ========================================================================== */
+
+@media (max-width: 37.5em) {
+  .pub .pub__item {
+    flex-direction: column;
+    gap: 0.9em;
+  }
+
+  .pub .pub__thumb {
+    flex: none;
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+/* ==========================================================================
+   动效降级 / 打印
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .pub .pub__item {
+    transition: none;
+  }
+}
+
+@media print {
+  .pub .pub__item {
+    break-inside: avoid;
+    box-shadow: none;
+  }
+
+  .pub .pub__btn {
+    display: none;
+  }
+}

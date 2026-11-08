@@ -1,0 +1,190 @@
+{% assign comp = site.data.competitions %}
+
+{% comment %} 统计数字全部由数据算出，新增奖项后不需要手动维护计数 {% endcomment %}
+{% assign aw_total = 0 %}
+{% assign aw_world = 0 %}
+{% assign aw_national = 0 %}
+{% for group in comp.years %}
+  {% for item in group.items %}
+    {% assign aw_total = aw_total | plus: 1 %}
+    {% if item.tier == 'world' %}{% assign aw_world = aw_world | plus: 1 %}{% endif %}
+    {% if item.tier == 'national' %}{% assign aw_national = aw_national | plus: 1 %}{% endif %}
+  {% endfor %}
+{% endfor %}
+
+<div class="aw" id="aw">
+
+  <ul class="aw__stats" aria-label="Summary">
+    <li class="aw__stat">
+      <span class="aw__stat-num">{{ aw_total }}</span>
+      <span class="aw__stat-label">Awards</span>
+    </li>
+    <li class="aw__stat aw__stat--world">
+      <span class="aw__stat-num">{{ aw_world }}</span>
+      <span class="aw__stat-label">International</span>
+    </li>
+    <li class="aw__stat aw__stat--national">
+      <span class="aw__stat-num">{{ aw_national }}</span>
+      <span class="aw__stat-label">National</span>
+    </li>
+  </ul>
+
+  <div class="aw__filters" role="group" aria-label="Filter by category">
+    {% for cat in comp.categories %}
+      {% assign cat_count = 0 %}
+      {% if cat.id == 'all' %}
+        {% assign cat_count = aw_total %}
+      {% else %}
+        {% for group in comp.years %}
+          {% for item in group.items %}
+            {% if item.category == cat.id %}{% assign cat_count = cat_count | plus: 1 %}{% endif %}
+          {% endfor %}
+        {% endfor %}
+      {% endif %}
+      {% assign is_active = false %}
+      {% if cat.id == 'all' %}{% assign is_active = true %}{% endif %}
+      <button type="button"
+              class="aw__filter{% if is_active %} is-active{% endif %}"
+              data-filter="{{ cat.id }}"
+              aria-pressed="{% if is_active %}true{% else %}false{% endif %}">
+        {{ cat.label }}<span class="aw__filter-count">{{ cat_count }}</span>
+      </button>
+    {% endfor %}
+  </div>
+
+  <ol class="aw__years">
+    {% for group in comp.years %}
+      <li class="aw__group">
+        <div class="aw__year-head">
+          <h2 class="aw__year">{{ group.year }}</h2>
+          <span class="aw__year-rule" aria-hidden="true"></span>
+          <span class="aw__year-count">{{ group.items | size }}</span>
+        </div>
+
+        <ul class="aw__items">
+          {% for item in group.items %}
+            {% case item.tier %}
+              {% when 'world' %}{% assign tier_label = 'World' %}
+              {% when 'national' %}{% assign tier_label = 'National' %}
+              {% when 'provincial' %}{% assign tier_label = 'Provincial' %}
+              {% else %}{% assign tier_label = 'Participant' %}
+            {% endcase %}
+            <li class="aw__item aw__item--{{ item.tier }}{% if item.images.size > 0 %} aw__item--has-media{% endif %}" data-category="{{ item.category }}">
+              <div class="aw__text">
+                <div class="aw__meta">
+                  <span class="aw__month">{{ item.month }} {{ group.year }}</span>
+                  <span class="aw__tier">{{ tier_label }}</span>
+                </div>
+                <h3 class="aw__event">{{ item.event }}</h3>
+                <p class="aw__foot">
+                  <span class="aw__badge">{{ item.prize }}</span>
+                  {% if item.detail.size > 0 %}
+                    <span class="aw__detail">{{ item.detail | join: ' · ' }}</span>
+                  {% endif %}
+                  {% if item.links.size > 0 %}
+                    {% for link in item.links %}
+                      <a class="aw__link" href="{{ link.url }}" rel="noopener">{{ link.text | default: 'Code' }} ↗</a>
+                    {% endfor %}
+                  {% endif %}
+                </p>
+              </div>
+              {% if item.images.size > 0 %}
+                <div class="aw__gallery" data-gallery>
+                  {% for shot in item.images %}
+                    <img class="aw__shot{% if forloop.first %} is-active{% endif %}"
+                         src="{{ shot | relative_url }}"
+                         alt="{{ item.event }}"
+                         loading="lazy">
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </li>
+    {% endfor %}
+  </ol>
+
+  <div class="aw__empty" hidden>
+    <p>No awards in this category yet.</p>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  var root = document.getElementById('aw');
+  if (!root) return;
+
+  var filters = root.querySelectorAll('.aw__filter');
+  var groups = root.querySelectorAll('.aw__group');
+  var empty = root.querySelector('.aw__empty');
+
+  function apply(filter) {
+    var shown = 0;
+    var firstVisible = null;
+
+    for (var g = 0; g < groups.length; g++) {
+      var items = groups[g].querySelectorAll('.aw__item');
+      var groupShown = 0;
+
+      for (var i = 0; i < items.length; i++) {
+        var match = filter === 'all' || items[i].getAttribute('data-category') === filter;
+        items[i].hidden = !match;
+        if (match) groupShown++;
+      }
+
+      /* 年份右侧的计数跟着筛选走，写死总数在筛选后就是错的 */
+      var countEl = groups[g].querySelector('.aw__year-count');
+      if (countEl) countEl.textContent = groupShown;
+
+      groups[g].hidden = groupShown === 0;
+      if (groupShown > 0 && firstVisible === null) firstVisible = groups[g];
+      shown += groupShown;
+    }
+
+    /* 第一个可见分组要顶掉分组间距：它前面那个分组虽然被隐藏，
+       但仍然激活 CSS 的相邻兄弟规则，会让标题上方凭空多出一截空白 */
+    for (var v = 0; v < groups.length; v++) {
+      groups[v].classList.toggle('is-first', groups[v] === firstVisible);
+    }
+
+    empty.hidden = shown !== 0;
+
+    for (var f = 0; f < filters.length; f++) {
+      var active = filters[f].getAttribute('data-filter') === filter;
+      filters[f].classList.toggle('is-active', active);
+      filters[f].setAttribute('aria-pressed', active ? 'true' : 'false');
+    }
+  }
+
+  for (var f = 0; f < filters.length; f++) {
+    filters[f].addEventListener('click', function () {
+      apply(this.getAttribute('data-filter'));
+    });
+  }
+
+  /* 初始也标一遍，保证首个年份标题的间距与筛选后一致 */
+  apply('all');
+
+  /* 卡片配图轮播：按索引错开启动，避免整页同时闪 */
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var galleries = root.querySelectorAll('[data-gallery]');
+  for (var gi = 0; gi < galleries.length; gi++) {
+    (function (gal, idx) {
+      var shots = gal.querySelectorAll('.aw__shot');
+      if (shots.length < 2 || reduceMotion) return;
+      var cur = 0;
+      function tick() {
+        shots[cur].classList.remove('is-active');
+        cur = (cur + 1) % shots.length;
+        shots[cur].classList.add('is-active');
+      }
+      setTimeout(function () {
+        tick();
+        setInterval(tick, 3000);
+      }, 1400 + idx * 350);
+    })(galleries[gi], gi);
+  }
+})();
+</script>

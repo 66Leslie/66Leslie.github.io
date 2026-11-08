@@ -1,0 +1,20 @@
+_site/
+push.sh
+.DS_Store
+
+# Local reference files and generated caches
+_local/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+.bundle/
+
+# Machine-specific Windows preview scripts
+/start-jekyll.bat
+/start-jekyll.ps1
+
+# Agent 工作目录（本地项目记忆，不进仓库）
+.workbuddy/
+
+# 删除工具产生的回收站
+.Trash-*/

@@ -1,0 +1,185 @@
+# 竞赛奖项记录 —— /competition/ 页面的唯一内容来源。
+# 新增奖项：在对应年份 items 列表的最上面加一条（年份块按从新到旧排列）。
+#
+# month      卡片上显示的时间，如 "Jul."
+# date       用于语义化标签，格式 YYYY-MM
+# event      赛事名称（作为条目标题）
+# prize      奖项名次，渲染成彩色徽章，如 "National First Prize"
+# tier       徽章配色 + 统计归类：
+#              world         世界赛名次，计入顶部 International
+#              national      国家级奖项，计入顶部 National
+#              provincial    省级奖项
+#              participation 参赛/入围，不计入任何统计
+# category   分类筛选，必须取自下面 categories 里的 id
+# detail     一行补充说明，数组写多个片段，页面上用 · 连接；不需要就整行删掉
+# links      可选，代码或成果链接：{ text: "Code", url: "..." }
+# images     可选，卡片配图路径列表；多张图片每 3 秒轮播，系统要求减少动态效果时停用
+#
+# 顶部的 Awards / International / National 三个统计数字、以及每个筛选按钮上的计数，
+# 都由页面按 tier 和 category 自动算出，不用手改。
+
+categories:
+  - id: all
+    label: "All"
+  - id: robot-soccer
+    label: "Robot Soccer"
+  - id: embedded
+    label: "Embedded & FPGA"
+  - id: electronics
+    label: "Electronics & Systems"
+  - id: math
+    label: "Math & Modeling"
+
+years:
+  - year: 2026
+    items:
+      - month: "Jul."
+        date: "2026-07"
+        event: "RoboCup 2026 World Championship"
+        prize: "Fourth Place"
+        tier: world
+        category: robot-soccer
+        detail:
+          - "Soccer Simulation 3D League"
+          - "Incheon, South Korea"
+          - "Team Captain, SolidWorkers"
+        links:
+          - text: "Code"
+            url: "https://github.com/66Leslie/booster-mjlab"
+          - text: "Video"
+            url: "https://www.xiaohongshu.com/explore/6a7831320000000006004191?xsec_token=AB5WBvOb5I429dcbzD-2El8MH6FWUspV6z1QNeHwT6G60=&xsec_source=pc_user"
+        images:
+          - "/assets/images/competitions/robocup-world-2026.gif"
+
+      - month: "May"
+        date: "2026-05"
+        event: "RoboCup 2026 China Open"
+        prize: "National First Prize (Runner-up)"
+        tier: national
+        category: robot-soccer
+        detail:
+          - "Soccer Simulation 3D"
+          - "Team Captain, SolidWorkers"
+        links:
+          - text: "Code"
+            url: "https://github.com/66Leslie/booster-mjlab"
+        images:
+          - "/assets/images/competitions/robocup-china-kick.gif"
+          - "/assets/images/competitions/robocup-china-getup.gif"
+          - "/assets/images/competitions/robocup-china-locate.gif"
+
+  - year: 2025
+    items:
+      - month: "Nov."
+        date: "2025-11"
+        event: "National Undergraduate Embedded Chip & System Design Competition"
+        prize: "National Third Prize"
+        tier: national
+        category: embedded
+        detail:
+          - "FPGA Track"
+          - "Team Captain"
+        links:
+          - text: "Code"
+            url: "https://github.com/66Leslie/hlstrack2025-44006"
+
+      - month: "Nov."
+        date: "2025-11"
+        event: "Jiangsu Robotics Competition"
+        prize: "Jiangsu First Prize"
+        tier: provincial
+        category: robot-soccer
+        detail:
+          - "Simulation 3D Soccer"
+          - "Team Captain"
+
+      - month: "Aug."
+        date: "2025-08"
+        event: "National Undergraduate Electronics Design Contest (NUEDC)"
+        prize: "National Second Prize"
+        tier: national
+        category: electronics
+        detail:
+          - "Team Captain"
+        links:
+          - text: "Code"
+            url: "https://github.com/66Leslie/ElectronicsDesignContest2025_A"
+        images:
+          - "/assets/images/competitions/electronics/nuedc-work-1.jpg"
+          - "/assets/images/competitions/electronics/nuedc-work-2.jpg"
+
+      - month: "Aug."
+        date: "2025-08"
+        event: "National Undergraduate Embedded Chip & System Design Competition"
+        prize: "National Third Prize"
+        tier: national
+        category: embedded
+        detail:
+          - "Application Track"
+        links:
+          - text: "Code"
+            url: "https://github.com/66Leslie/NearLink_application"
+        images:
+          - "/assets/images/competitions/embedded/nearlink-cart.jpg"
+          - "/assets/images/competitions/embedded/nearlink-conveyor.jpg"
+
+      - month: "Jul."
+        date: "2025-07"
+        event: "Siemens Cup China Intelligent Manufacturing Challenge"
+        prize: "Jiangsu Second Prize"
+        tier: provincial
+        category: electronics
+        detail:
+          - "Team Captain"
+
+      - month: "Jun."
+        date: "2025-06"
+        event: "Lanqiao Cup"
+        prize: "Jiangsu Second Prize"
+        tier: provincial
+        category: embedded
+        detail:
+          - "Microcontroller Design and Development"
+          - "Individual"
+        links:
+          - text: "Code"
+            url: "https://github.com/66Leslie/BB_MCU"
+
+  - year: 2024
+    items:
+      - month: "Nov."
+        date: "2024-11"
+        event: "Jiangsu Robotics Competition"
+        prize: "Jiangsu Second Prize (Third Place)"
+        tier: provincial
+        category: robot-soccer
+        detail:
+          - "Fourth Contributor"
+
+      - month: "Nov."
+        date: "2024-11"
+        event: "Chinese Mathematics Competitions"
+        prize: "Jiangsu Second Prize"
+        tier: provincial
+        category: math
+        detail:
+          - "Non-Mathematics Category A"
+          - "Individual"
+
+      - month: "Aug."
+        date: "2024-08"
+        event: "National Undergraduate Electronics Design Contest (NUEDC)"
+        prize: "Jiangsu Second Prize"
+        tier: provincial
+        category: electronics
+        detail:
+          - "Team Captain"
+
+      - month: "Aug."
+        date: "2024-08"
+        event: "National Undergraduate Embedded Chip & System Design Competition"
+        prize: "Jiangsu Third Prize"
+        tier: provincial
+        category: embedded
+        detail:
+          - "Second Contributor"

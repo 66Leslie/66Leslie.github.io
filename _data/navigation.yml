@@ -1,0 +1,10 @@
+# Main navigation. Competitions and Publications are separate pages.
+main:
+  - title: "About Me"
+    url: "/"
+
+  - title: "Competitions"
+    url: "/competition/"
+
+  - title: "Publications"
+    url: "/publications/"

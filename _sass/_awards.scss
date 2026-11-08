@@ -1,0 +1,469 @@
+/* ==========================================================================
+   AWARDS — /competition/  （竞赛奖项 · 卡片式）
+   数据来自 _data/competitions.yml，组件 _includes/awards.html
+
+   选择器统一带 .aw 前缀，是为了压过主题 .page__content 里的
+   `li a / p / li` 规则（权重 0,1,1 ~ 0,2,1）。这样既不需要 !important，
+   也不依赖 @import 的先后顺序。
+   ========================================================================== */
+
+/* —— 配色：tier → 主色 + 浅底色，唯一来源 —— */
+$aw-tiers: (
+  world:         (main: #b8720c, soft: #fdf4e4),
+  national:      (main: #224b8d, soft: #eaf1fb),
+  provincial:    (main: #0f766e, soft: #e6f4f1),
+  participation: (main: #6b7280, soft: #f2f3f5)
+);
+
+@function aw-tone($tier, $key) {
+  @return map-get(map-get($aw-tiers, $tier), $key);
+}
+
+/* —— 字号 ——
+   主题基准：正文 1em，h1 = 1.4em，h2 = 1.2em，h3 = 1em。
+   年份是分组标题，不能压过页面 h1（1.4em），故取 1.35em。 */
+$aw-fs-stat  : 2.1em;    // 顶部统计数字
+$aw-fs-year  : 1.35em;   // 年份标题
+$aw-fs-event : 1.1em;    // 赛事名
+$aw-fs-body  : 0.86em;   // 详情行
+$aw-fs-meta  : 0.7em;    // 月份 / tier 标签
+$aw-fs-badge : 0.78em;   // 奖项徽章
+
+/* —— 间距 —— */
+$aw-gap-block : 2em;     // 区块之间
+$aw-gap-item  : 0.6em;   // 卡片之间
+$aw-pad-card  : 1em 1.2em 1.05em;
+
+/* —— 几何 —— */
+$aw-accent : 4px;        // 卡片左侧色条
+$aw-radius : 6px;
+
+/* ==========================================================================
+   根容器：清掉主题给列表/段落/标题的默认间距
+   ========================================================================== */
+
+.aw {
+  margin-top: 1.2em;
+
+  .aw__stats,
+  .aw__filters,
+  .aw__years,
+  .aw__items {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .aw__group,
+  .aw__item,
+  .aw__stat {
+    margin: 0;
+    list-style: none;
+  }
+
+  .aw__year,
+  .aw__event {
+    margin: 0;
+  }
+}
+
+/* ==========================================================================
+   顶部统计 —— 三张带色调的小卡
+   ========================================================================== */
+
+.aw .aw__stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.8em;
+  margin-bottom: $aw-gap-block;
+
+  @media (max-width: 37.5em) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.aw .aw__stat {
+  padding: 0.8em 1em 0.85em;
+  background-color: $lighter-gray;
+  border-top: 3px solid $gray;
+  border-radius: $aw-radius;
+
+  @media (max-width: 37.5em) {
+    display: flex;
+    align-items: baseline;
+    gap: 0.7em;
+  }
+}
+
+.aw .aw__stat--world {
+  background-color: aw-tone(world, soft);
+  border-top-color: aw-tone(world, main);
+}
+
+.aw .aw__stat--national {
+  background-color: aw-tone(national, soft);
+  border-top-color: aw-tone(national, main);
+}
+
+.aw .aw__stat-num {
+  display: block;
+  font-size: $aw-fs-stat;
+  font-weight: 700;
+  line-height: 1.05;
+  color: $info-color;
+  font-variant-numeric: tabular-nums;
+
+  @media (max-width: 37.5em) {
+    font-size: 1.7em;
+  }
+}
+
+.aw .aw__stat--world .aw__stat-num {
+  color: aw-tone(world, main);
+}
+
+.aw .aw__stat--national .aw__stat-num {
+  color: aw-tone(national, main);
+}
+
+.aw .aw__stat-label {
+  display: block;
+  margin-top: 0.15em;
+  font-size: 0.76em;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: $gray;
+
+  @media (max-width: 37.5em) {
+    margin-top: 0;
+  }
+}
+
+/* ==========================================================================
+   分类筛选 —— 药丸按钮
+   ========================================================================== */
+
+.aw .aw__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45em;
+  margin-bottom: 1.6em;   /* 与分组间距 2em 接近，避免与标题的距离忽大忽小 */
+}
+
+.aw .aw__filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.34em 0.85em;
+  font-size: 0.8em;
+  font-family: inherit;
+  color: $dark-gray;
+  background-color: #fff;
+  border: 1px solid $border-color;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+
+  &:hover {
+    color: $info-color;
+    border-color: $info-color;
+  }
+
+  &.is-active {
+    color: #fff;
+    background-color: $info-color;
+    border-color: $info-color;
+  }
+}
+
+.aw .aw__filter-count {
+  font-variant-numeric: tabular-nums;
+  opacity: 0.6;
+}
+
+.aw .aw__filter.is-active .aw__filter-count {
+  opacity: 0.75;
+}
+
+/* ==========================================================================
+   年份分组
+   ========================================================================== */
+
+.aw .aw__group + .aw__group {
+  margin-top: $aw-gap-block;
+}
+
+/* 筛选后第一个可见分组要顶掉分组间距。否则它前面那个被隐藏的分组
+   仍然激活相邻兄弟规则，标题上方会凭空多出一截空白。 */
+.aw .aw__group.is-first {
+  margin-top: 0;
+}
+
+.aw .aw__group[hidden] {
+  display: none;
+}
+
+.aw .aw__year-head {
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+  margin-bottom: 0.9em;
+}
+
+.aw .aw__year {
+  font-size: $aw-fs-year;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: $darker-gray;
+}
+
+.aw .aw__year-rule {
+  flex: 1;
+  height: 2px;
+  border-radius: 1px;
+  background: linear-gradient(to right, $border-color, transparent);
+}
+
+.aw .aw__year-count {
+  font-size: 0.75em;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: $gray;
+}
+
+/* ==========================================================================
+   奖项卡片
+   ========================================================================== */
+
+.aw .aw__item {
+  --aw-c: #{$gray};
+  --aw-soft: #{$lighter-gray};
+
+  position: relative;
+  padding: $aw-pad-card;
+  padding-left: 1.4em;
+  background-color: #fff;
+  border: 1px solid $border-color;
+  border-left: $aw-accent solid var(--aw-c);
+  border-radius: $aw-radius;
+  transition: box-shadow 0.18s ease, border-color 0.18s ease;
+
+  &:hover {
+    border-color: var(--aw-c);
+    box-shadow: 0 2px 10px rgba(#000, 0.07);
+  }
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+.aw .aw__item + .aw__item {
+  margin-top: $aw-gap-item;
+}
+
+@each $tier, $tones in $aw-tiers {
+  .aw .aw__item--#{$tier} {
+    --aw-c: #{map-get($tones, main)};
+    --aw-soft: #{map-get($tones, soft)};
+  }
+}
+
+/* 卡片顶部：月份 + tier 标签 */
+.aw .aw__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  margin-bottom: 0.4em;
+}
+
+.aw .aw__month {
+  font-size: $aw-fs-meta;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--aw-c);
+}
+
+.aw .aw__tier {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  padding: 0.12em 0.55em;
+  font-size: $aw-fs-meta;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--aw-c);
+  background-color: var(--aw-soft);
+  border-radius: 999px;
+
+  &::before {
+    content: "";
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: var(--aw-c);
+  }
+}
+
+/* 赛事名 */
+.aw .aw__event {
+  font-size: $aw-fs-event;
+  font-weight: 700;
+  line-height: 1.35;
+  color: $darker-gray;
+}
+
+/* 奖项 + 详情 */
+.aw .aw__foot {
+  margin: 0.45em 0 0;
+  font-size: $aw-fs-body;
+  line-height: 1.6;
+  color: $dark-gray;
+}
+
+.aw .aw__badge {
+  display: inline-block;
+  margin-right: 0.5em;
+  padding: 0.18em 0.62em;
+  font-size: $aw-fs-badge;
+  font-weight: 700;
+  color: var(--aw-c);
+  background-color: var(--aw-soft);
+  border: 1px solid var(--aw-c);
+  border-radius: $aw-radius;
+}
+
+.aw .aw__detail {
+  color: $gray;
+}
+
+/* 链接：压过主题 .page__content li a 的下划线与绿色 */
+.aw .aw__item .aw__link {
+  display: inline-block;
+  margin-left: 0.5em;
+  font-weight: 600;
+  color: var(--aw-c);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+
+  &:hover {
+    color: var(--aw-c);
+    text-decoration: none;
+    border-bottom-color: var(--aw-c);
+  }
+}
+
+/* ==========================================================================
+   卡片配图轮播：桌面端置于右侧，与左侧文字区等高
+   contain 保留完整画面；窄屏改为下方预览，避免挤压奖项文字。
+   ========================================================================== */
+
+.aw .aw__item--has-media {
+  display: flex;
+  align-items: stretch;
+  gap: 1.25em;
+}
+
+.aw .aw__text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.aw .aw__gallery {
+  position: relative;
+  flex: 0 0 240px;
+  align-self: center;
+  width: 240px;
+  height: 150px;
+  overflow: hidden;
+  border: 1px solid $border-color;
+  border-radius: 4px;
+  background-color: #f7f7f8;
+  line-height: 0;
+}
+
+.aw .aw__shot {
+  position: absolute;
+  inset: 0;
+  display: none;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.aw .aw__shot.is-active {
+  display: block;
+}
+
+@media (max-width: 37.5em) {
+  .aw .aw__item--has-media {
+    flex-direction: column;
+    gap: 0.75em;
+  }
+
+  .aw .aw__gallery {
+    flex: none;
+    width: 100%;
+    height: 150px;
+    min-height: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aw .aw__shot {
+    transition: none;
+  }
+}
+
+/* ==========================================================================
+   空态
+   ========================================================================== */
+
+.aw .aw__empty {
+  padding: 1.6em;
+  text-align: center;
+  background-color: $lighter-gray;
+  border: 1px dashed $border-color;
+  border-radius: $aw-radius;
+
+  &[hidden] {
+    display: none;
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.88em;
+    color: $gray;
+  }
+}
+
+/* ==========================================================================
+   动效降级 / 打印
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .aw .aw__item,
+  .aw .aw__filter {
+    transition: none;
+  }
+}
+
+@media print {
+  .aw .aw__filters {
+    display: none;
+  }
+
+  .aw .aw__stat,
+  .aw .aw__item {
+    border-color: $border-color;
+    box-shadow: none;
+  }
+
+  .aw .aw__item {
+    break-inside: avoid;
+  }
+}
